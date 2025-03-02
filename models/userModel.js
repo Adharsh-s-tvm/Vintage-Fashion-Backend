@@ -13,7 +13,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        trim: true
+        trim: true,
+        // Generate username from firstname and lastname
+        default: function () {
+            return `${this.firstname.toLowerCase()}_${this.lastname.toLowerCase()}`;
+        }
     },
     email: {
         type: String,
@@ -22,12 +26,11 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: false,
-        default: null
+        required: true
     },
     image: {
         type: String,
-        required: true
+        required: false
     },
     createdAt: {
         type: Date,

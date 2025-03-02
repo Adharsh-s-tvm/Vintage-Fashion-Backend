@@ -12,7 +12,7 @@ import { authenticate, authorizeAdmin } from "../middlewares/authMiddleware.js";
 const router = express.Router();
 
 router
-    .route("/")
+    .route("/signup")
     .post(createUser)
 
 router.post("/login", loginUser);
