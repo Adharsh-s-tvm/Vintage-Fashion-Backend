@@ -7,18 +7,18 @@ import User from "../models/userModel.js";
 
 
 
-const loginAdmin = asyncHandler( async (req, res) => {
+const loginAdmin = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
     const admin = await Admin.findOne({ email });
-  
+
     if (admin && (await admin.matchPassword(password))) {
-      const token = jwt.sign({ id: admin._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
-      res.cookie("token", token, { httpOnly: true });
-      res.json({ message: "Login successful", token });
+        const token = jwt.sign({ id: admin._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+        res.cookie("token", token, { httpOnly: true });
+        res.json({ message: "Login successful", token });
     } else {
-      res.status(401).json({ message: "Invalid email or password" });
+        res.status(401).json({ message: "Invalid email or password" });
     }
-  });
+});
 
 
 const logoutCurrentAdmin = asyncHandler(async (req, res) => {
@@ -90,14 +90,12 @@ const deleteUserById = asyncHandler(async (req, res) => {
 });
 
 
-  
 
-
-  export { 
-    loginAdmin, 
-    getAllUsers, 
-    deleteUserById, 
+export {
+    loginAdmin,
+    getAllUsers,
+    deleteUserById,
     getUserById,
-    updateUserById,    
+    updateUserById,
     logoutCurrentAdmin
-} ;
+};
